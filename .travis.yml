@@ -6,5 +6,11 @@ cache:
   - node_modules
 addons:
   code_climate
+before_script:
+  - export CC_TEST_REPORTER_ID=85c0eb54af18efcbf32648ca8415fbe9afba8a8520075a2b24517a98a6b783e5
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
-  - npm run travis 
+  - npm run travis
+  - npm test -u --coverage --watchAll=false 
