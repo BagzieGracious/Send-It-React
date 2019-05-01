@@ -6,12 +6,5 @@ cache:
   - node_modules
 addons:
   code_climate
-before_script:
-  - export CC_TEST_REPORTER_ID=21b90f220417bb262ca910cc1dac5a043ee98645e61669e811a5e8237b5e55d0
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 script:
-  - npm run travis
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run travis 
