@@ -29,7 +29,7 @@ SendIT is a courier service that helps users deliver parcels to different destin
 
 Create a new directory and initialize git in it. Clone this repository by running
 ```sh
-$ git clone https://github.com/BagzieGracious/Send-It-React.git
+$ then git clone https://github.com/BagzieGracious/Send-It-React.git
 ```
 Install all packages needed to run the project by using
 ```sh

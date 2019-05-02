@@ -87,11 +87,32 @@ div.stats {
 	top: 220px;
 	width: 60%;
 	left: 20%;
-	height: 120px;
 	overflow: auto;
 	padding: 15px;
+	overflow: auto;
 }
-div.rcd {
+div.stats .left-login-form {
+	float: left;
+	border-right: 2px solid #16a085;
+	width: 48%;
+	padding-right: 2%;
+}
+div.stats .text-or {
+	background: #16a085;
+	width: 20px;
+	height: 20px;
+	float: left;
+	margin-left: -15px;
+	padding: 5px;
+	border-radius: 50%;
+	color: white;
+	margin-top: 25%;
+}
+div.stats .right-login-form {
+	float: right;
+	width: 46%;
+}
+div.stats div.rcd {
 	float: left;
 	width: 23%;
 	margin: 0px 1%;
@@ -219,7 +240,8 @@ div.login-wrapper .wrap .form {
 }
 div.login-wrapper .wrap .form p#login-error,
 div.login-wrapper .wrap .form p#sign-error,
-p#login-error {
+p#login-error,
+p#sign-error {
 	background: #dc3545;
 	text-align: left;
 	padding: 10px 10px;
@@ -246,7 +268,7 @@ div.login-wrapper .wrap .form .text,
 .text textarea {
 	margin: 10px 0px;
 	position: relative;
-	width: 91%;
+	width: 88%;
 	padding: 10px 15px;
 	border: 2px solid #16a085;
 }
@@ -257,6 +279,10 @@ div.login-wrapper .wrap .form .text,
 	padding: 10px 15px;
 	margin-right: 5px;
 	cursor: pointer;
+}
+.text button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
 }
 .text button.success {
 	background: #16a085;
@@ -425,16 +451,15 @@ div.breadcrumb ul li {
 	div.stats {
 		top: 22%;
 		height: auto;
+		overflow: auto;
 	}
-	div.rcd {
-		width: 45%;
+	div.stats .left-login-form {
+		float: left;
 	}
-	div.rcd h3 {
-		font-size: 14px;
+	div.stats .right-login-form {
+		float: right;
 	}
-	div.rcd img {
-		margin-left: 35%;
-	}
+
 	div.about-us {
 		margin-top: 390px;
 	}

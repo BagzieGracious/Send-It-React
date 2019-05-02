@@ -23,6 +23,7 @@ describe('test authReducer', () => {
 			errorSignup: false,
 			errorSignupMessage: '',
 			loading: false,
+			loginsuccess: true,
 			success: false,
 			successMessage: '',
 			userdata: { token: 'bagendasdssdfdfdsfs', username: 'bagzie', usertype: 'user' }

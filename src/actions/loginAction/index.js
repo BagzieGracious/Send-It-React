@@ -18,7 +18,6 @@ const loginAction = userdata => dispatch =>
 				localStorage.setItem('usertype', data['usertype']);
 				localStorage.setItem('token', data['token']);
 				dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-				userdata.history.push('/home');
 			}
 		});
 

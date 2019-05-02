@@ -23,7 +23,50 @@ describe('Test LoginView component', () => {
 		history: history
 	};
 
-	it('test if it renders login modal', () => {
+	it('test if it renders login handler', () => {
+		const wrapper = mount(
+			<Provider store={store}>
+				<Router history={history}>
+					<LoginView {...props} />
+				</Router>
+			</Provider>
+		);
+
+		const event = {
+			target: {
+				name: 'username',
+				value: 'bagenda'
+			}
+		};
+		wrapper
+			.find('LoginView')
+			.instance()
+			.loginHandler(event);
+	});
+
+	it('test if it renders signup handler', () => {
+		const wrapper = mount(
+			<Provider store={store}>
+				<Router history={history}>
+					<LoginView {...props} />
+				</Router>
+			</Provider>
+		);
+
+		const event = {
+			target: {
+				name: 'username',
+				value: 'bagenda'
+			}
+		};
+
+		wrapper
+			.find('LoginView')
+			.instance()
+			.userdetailsHandler(event);
+	});
+
+	it('test if it renders login', () => {
 		const wrapper = mount(
 			<Provider store={store}>
 				<Router history={history}>
@@ -35,10 +78,10 @@ describe('Test LoginView component', () => {
 		wrapper
 			.find('LoginView')
 			.instance()
-			.loginHandler();
+			.loginUserHandler();
 	});
 
-	it('test if it renders signup modal', () => {
+	it('test if it renders signup', () => {
 		const wrapper = mount(
 			<Provider store={store}>
 				<Router history={history}>
@@ -51,20 +94,5 @@ describe('Test LoginView component', () => {
 			.find('LoginView')
 			.instance()
 			.signupHandler();
-	});
-
-	it('test if it closes any modal', () => {
-		const wrapper = mount(
-			<Provider store={store}>
-				<Router history={history}>
-					<LoginView {...props} />
-				</Router>
-			</Provider>
-		);
-
-		wrapper
-			.find('LoginView')
-			.instance()
-			.closeHandler();
 	});
 });

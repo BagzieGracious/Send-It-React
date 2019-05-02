@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import createParcelAction from '../../../actions/createParcelAction';
+import LoaderComponent from '../../../components/loaderComponent';
 
 export class CreateComponent extends Component {
 	state = {
@@ -8,31 +9,32 @@ export class CreateComponent extends Component {
 		weight: '',
 		pickup: '',
 		destination: '',
-		description: ''
+		description: '',
+		loading: false,
+		buttonstatus: false,
+		error: false,
+		errormessage: '',
+		success: false,
+		successmessage: ''
 	};
 
-	productHandler = event => {
-		this.setState({ product: event.target.value });
-	};
-
-	weightHandler = event => {
-		this.setState({ weight: event.target.value });
-	};
-
-	pickupHandler = event => {
-		this.setState({ pickup: event.target.value });
-	};
-
-	destinationHandler = event => {
-		this.setState({ destination: event.target.value });
-	};
-
-	descriptionHandler = event => {
-		this.setState({ description: event.target.value });
+	parcelHandler = event => {
+		if (
+			this.state.product !== '' &&
+			this.state.weight !== '' &&
+			this.state.pickup !== '' &&
+			this.state.destination !== '' &&
+			this.state.description !== ''
+		) {
+			this.setState({ [event.target.name]: event.target.value, buttonstatus: false });
+		} else {
+			this.setState({ [event.target.name]: event.target.value, buttonstatus: true });
+		}
 	};
 
 	createparcelHandler = () => {
 		const { createParcelAction } = this.props;
+		this.setState({ loading: true });
 		createParcelAction({
 			product: this.state.product,
 			weight: this.state.weight,
@@ -42,28 +44,46 @@ export class CreateComponent extends Component {
 		});
 	};
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.parcel.error) {
+			this.setState({ loading: false, error: true, errormessage: nextProps.parcel.errorMessage, success: false });
+		}
+		if (nextProps.parcel.success) {
+			this.setState({
+				loading: false,
+				error: false,
+				successmessage: nextProps.parcel.successMessage,
+				success: true
+			});
+		}
+		setTimeout(() => {
+			this.setState({ error: false, success: false });
+		}, 6000);
+	}
+
 	render() {
 		return (
 			<div className="services" style={{ marginBottom: '30px' }}>
 				<div className="order-form">
-					{this.props.parcel.error && <p id="login-error">{this.props.parcel.errorMessage}</p>}
-					{this.props.parcel.success && <p id="login-success">You have successfully made an order.</p>}
+					{this.state.error && <p id="login-error">{this.state.errormessage}</p>}
+					{this.state.success && <p id="login-success">You have created an order successfully.</p>}
 					<div className="form-left">
 						<div className="text">
 							<label>Product Name</label>
 							<input
 								type="text"
-								id="parcel-product"
-								onChange={this.productHandler}
+								name="product"
+								onChange={this.parcelHandler}
 								placeholder="enter product name"
+								id="parcel-product"
 							/>
 						</div>
 						<div className="text">
 							<label>Product Weight</label>
 							<input
 								type="number"
-								id="parcel-weight"
-								onChange={this.weightHandler}
+								name="weight"
+								onChange={this.parcelHandler}
 								placeholder="enter product weight"
 							/>
 						</div>
@@ -71,8 +91,8 @@ export class CreateComponent extends Component {
 							<label>Pickup Area</label>
 							<input
 								type="text"
-								id="parcel-pickup"
-								onChange={this.pickupHandler}
+								name="pickup"
+								onChange={this.parcelHandler}
 								placeholder="enter product your pickup"
 							/>
 						</div>
@@ -80,8 +100,8 @@ export class CreateComponent extends Component {
 							<label>Product Destination</label>
 							<input
 								type="text"
-								id="parcel-destination"
-								onChange={this.destinationHandler}
+								name="destination"
+								onChange={this.parcelHandler}
 								placeholder="enter product destination"
 							/>
 						</div>
@@ -90,19 +110,24 @@ export class CreateComponent extends Component {
 						<div className="text">
 							<label>Product Description</label>
 							<textarea
-								id="parcel-description"
-								onChange={this.descriptionHandler}
+								name="description"
+								onChange={this.parcelHandler}
 								placeholder="enter product description"
 							/>
 						</div>
 						<div className="text">
-							<button className="success" id="success" onClick={this.createparcelHandler}>
+							<button
+								className="success"
+								disabled={this.state.buttonstatus}
+								id="success"
+								onClick={this.createparcelHandler}
+							>
 								Place Order
 							</button>
-							<button className="danger">Cancel</button>
 						</div>
 					</div>
 				</div>
+				{this.state.loading && <LoaderComponent />}
 			</div>
 		);
 	}
@@ -114,4 +139,7 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { createParcelAction })(CreateComponent);
+export default connect(
+	mapStateToProps,
+	{ createParcelAction }
+)(CreateComponent);

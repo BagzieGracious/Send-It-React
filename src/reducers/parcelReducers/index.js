@@ -13,7 +13,8 @@ const parcelReducer = (state = initialState, action) => {
 		case 'GET_ALL_PARCELS':
 			return {
 				...state,
-				parcels: action.payload
+				parcels: action.payload,
+				success: false
 			};
 
 		case 'CREATE_PARCELS':

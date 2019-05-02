@@ -18,9 +18,11 @@ export class OrdersComponent extends Component {
 					<td>
 						<img src={parcel} alt="" />
 					</td>
-					<td>
-						<a href="/">{data.description}</a>
+					<td className="ctr">
+						<a href="/">{data.product}</a>
 					</td>
+					<td className="ctr">{data.pickup}</td>
+					<td className="ctr">{data.destination}</td>
 					<td className="rgt">
 						<small>{data.order_date}</small>
 					</td>
@@ -45,7 +47,9 @@ export class OrdersComponent extends Component {
 						<thead>
 							<tr>
 								<td style={{ width: '10%' }}>Image</td>
-								<td>Product Description</td>
+								<td className="ctr">Product</td>
+								<td className="ctr">Pick up</td>
+								<td className="ctr">Destination</td>
 								<td className="rgt">Date Created</td>
 							</tr>
 						</thead>
@@ -63,4 +67,7 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { getParcelsAction })(OrdersComponent);
+export default connect(
+	mapStateToProps,
+	{ getParcelsAction }
+)(OrdersComponent);

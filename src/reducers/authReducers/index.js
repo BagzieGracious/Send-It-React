@@ -5,6 +5,7 @@ const initialState = {
 	errorSignup: false,
 	successMessage: '',
 	success: false,
+	loginsuccess: false,
 	loading: false
 };
 
@@ -13,7 +14,8 @@ const authReducer = (state = initialState, action) => {
 		case 'LOGIN_SUCCESS':
 			return {
 				...state,
-				userdata: action.payload
+				userdata: action.payload,
+				loginsuccess: true
 			};
 
 		case 'LOGIN_FAILURE':
